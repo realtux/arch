@@ -1,0 +1,14 @@
+// axio language
+out 'hello world\n'
+out 'brian'
+
+// i'm a comment
+// never made a language before
+out '\n'
+out ''
+out ''
+out ''
+out ''
+out ''
+out ''
+out 'output'
