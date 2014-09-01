@@ -7,17 +7,19 @@ from modules.error import *
 symbols = {}
 
 try:
-    axio_source = open(sys.argv[1]).read()
+    vortex_source = open(sys.argv[1]).read()
 except IOError:
-    err_fatal('Axio Fatal: File could not be opened')
+    err_fatal('File could not be opened')
+except IndexError:
+    err_fatal('File could not be opened')
 
-axio_lines = axio_source.split('\n')
+vortex_lines = vortex_source.split('\n')
 
 i = 1
 
 source = ''
 
-for line in axio_lines:
+for line in vortex_lines:
     #print str(i) + ': ' + line
     i += 1
 
