@@ -1,9 +1,14 @@
 // i'm a comment
 
 // i'm not \/
-out 'hello world'
+out 'hello world\n'
 
 // what happens if i output nothing
+out 'r\n'
 out ''
 out ''
-out ''
+
+var name = 'brian'
+var name = 'sam'
+
+out names
