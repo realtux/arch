@@ -37,7 +37,10 @@ def out(source):
             output = globals.symbol_table['variables'][variable_name]
             i += len(variable_name)
         except KeyError:
-            err_fatal('Variable not found')
+            err_fatal('Undefined variable')
+
+    else:
+        err_fatal('Undefined out instruction')
 
     output = string.replace(output, '\\n', '\n')
 

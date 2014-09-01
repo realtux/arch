@@ -11,4 +11,7 @@ out ''
 var name = 'brian'
 var name = 'sam'
 
-out names
+var test = 'tes'
+
+out name
+out test
