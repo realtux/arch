@@ -1,14 +1,9 @@
-// axio language
-out 'hello world\n'
-out 'brian'
-
 // i'm a comment
-// never made a language before
-out '\n'
+
+// i'm not \/
+out 'hello world'
+
+// what happens if i output nothing
 out ''
 out ''
 out ''
-out ''
-out ''
-out ''
-out 'output'
