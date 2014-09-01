@@ -1,9 +1,11 @@
-from builtin import *
+from modules.io import *
 
 keywords = {
     'out': out
 }
 
+# chew up the space until the next character that isn't a space
+# returns: number of spaces until the next character is hit
 def eat_space(source):
     i = 0
 
@@ -14,7 +16,7 @@ def eat_space(source):
 def eat_comment(source):
     i = 0
 
-    while source[i] != '-':
+    while source[i] != '\n':
         i += 1
 
     return i
