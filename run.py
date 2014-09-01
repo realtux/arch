@@ -1,49 +1,64 @@
 import sys
 import re
 
+import globals
+
 from parsetools import *
 from modules.error import *
 
-symbols = {}
+globals.init()
 
 try:
-    vortex_source = open(sys.argv[1]).read()
+    arch_source = open(sys.argv[1]).read()
 except IOError:
     err_fatal('File could not be opened')
 except IndexError:
     err_fatal('File could not be opened')
 
-vortex_lines = vortex_source.split('\n')
+arch_lines = arch_source.split('\n')
 
 i = 1
 
 source = ''
 
-for line in vortex_lines:
-    #print str(i) + ': ' + line
+# remove all whitespace and string commands end to end
+for sourceline in arch_lines:
+    #print str(i) + ': ' + sourceline
     i += 1
 
-    source += str(line.strip()) + '\n'
+    source += str(sourceline.strip()) + '\n'
 
 source = source[:-1]
 
 i = 0
 
+# main lexer, parse every letter
 while i < len(source):
+    # eat all space encountered that isn't part of a string
     if source[i] == ' ':
         i += eat_space(source[i:])
         continue
 
+    # end of line, push past and increment line
+    elif source[i] == '\n':
+        i += 1
+        globals.line += 1
+        continue
+
+    # comment, eat text up to newline
     elif source[i:].startswith('//'):
         i += eat_comment(source[i:])
         continue
 
+    # keywords, functions, variables
     elif re.search(r"^[a-z]", source[i:]):
         if is_keyword(source[i:]):
             i += handle_keyword(source[i:])
+        else:
+            err_fatal('Unrecognized symbol')
 
     else:
-        i += 1
+        err_fatal('Unrecognized symbol')
 
 # end execution
 print ''
