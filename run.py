@@ -28,8 +28,6 @@ for sourceline in arch_lines:
 
     source += str(sourceline.strip()) + '\n'
 
-source = source[:-1]
-
 i = 0
 
 # main lexer, parse every letter
@@ -37,6 +35,11 @@ while i < len(source):
     # eat all space encountered that isn't part of a string
     if source[i] == ' ':
         i += eat_space(source[i:])
+        continue
+
+    # end of command, push past
+    elif source[i] == ';':
+        i += 1
         continue
 
     # end of line, push past and increment line
@@ -47,6 +50,7 @@ while i < len(source):
 
     # comment, eat text up to newline
     elif source[i:].startswith('//'):
+        print source[i:i+3]
         i += eat_comment(source[i:])
         continue
 
