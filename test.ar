@@ -1,23 +1,27 @@
 // i'm a comment
 
 // i'm not \/
-out 'hello world\n';
+out 'hello world\n'
 
 // what happens if i output nothing
-out 'r\n';
-//out '';
-//out '';
+out 'r\n'
+//out ''
+//out ''
 
-//var name = 'brian';
-//var name = 'sam';
+var name = 'brian'
+var name = 'tom\n'
+var namey = 'breez'
+out name
+out namey
+//var name = 'sam'
 
-//var test = 'tes';
+//var test = 'tes'
 
-//out name;
-//out test;
+//out name
+//out test
 
 //if name == 'sam' {
-//    out 'cool';
+//    out 'cool'
 //} else {
-//    out 'not cool';
+//    out 'not cool'
 //}
