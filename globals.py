@@ -1,5 +1,4 @@
 from modules.io import *
-from modules.variables import *
 
 def init():
     global line
@@ -10,8 +9,7 @@ def init():
         'variables' : {}
     }
 
-    global keywords
-    keywords = {
+    global constructs
+    constructs = {
         'out': out,
-        'var': var
     }
