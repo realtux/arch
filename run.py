@@ -37,11 +37,6 @@ while i < len(source):
         i += eat_space(source[i:])
         continue
 
-    # end of command, push past
-    elif source[i] == ';':
-        i += 1
-        continue
-
     # end of line, push past and increment line
     elif source[i] == '\n':
         i += 1
@@ -50,16 +45,17 @@ while i < len(source):
 
     # comment, eat text up to newline
     elif source[i:].startswith('//'):
-        print source[i:i+3]
+        #print globals.line, source[i:3]
         i += eat_comment(source[i:])
         continue
 
-    # keywords, functions, variables
-    elif re.search(r"^[a-z]", source[i:]):
-        if is_keyword(source[i:]):
-            i += handle_keyword(source[i:])
-        else:
-            err_fatal('Unrecognized symbol')
+    # assignments
+    elif re.search(r"^var [a-z0-9]+\s*\=\s*.+\n", source[i:]):
+        i += handle_assignment(source[i:])
+
+    # constructs (out)
+    elif re.search(r"^out", source[i:]):
+        i += handle_construct(source[i:])
 
     else:
         err_fatal('Unrecognized symbol')

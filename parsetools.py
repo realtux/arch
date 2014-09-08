@@ -1,3 +1,5 @@
+import re
+
 import globals
 
 # chew up the space until the next character that isn't a space
@@ -18,17 +20,41 @@ def eat_comment(source):
     # return number of characters and push past the newline
     return i
 
-def is_keyword(source):
-    for keyword in globals.keywords:
-        if source.startswith(keyword):
-            return keyword
+def handle_assignment(source):
+    assignment = re.compile('^var ([a-z0-9]+)\s*\=\s*(.+)\n').search(source)
+
+    # assignment
+    if assignment:
+        variable = assignment.groups()[0]
+        expression = assignment.groups()[1]
+
+        evaluated_expression = evaluate_expression(expression)
+
+        globals.symbol_table['variables'][variable] = evaluated_expression
+
+        i = 0
+        while source[i] != '\n': i += 1
+
+        return i
+
+def evaluate_expression(expression):
+    # string assignment
+    if re.search(r"^\'(.+)\'", expression):
+        string = re.search(r"^\'(.+)\'", expression)
+
+        return string.groups()[0]
+
+def is_construct(source):
+    for construct in globals.constructs:
+        if source.startswith(construct):
+            return construct
 
     return False
 
-def handle_keyword(source):
-    for keyword in globals.keywords:
-        if source.startswith(keyword):
-            callable = keyword
+def handle_construct(source):
+    for construct in globals.constructs:
+        if source.startswith(construct):
+            callable = construct
             break
 
-    return globals.keywords[callable](source)
+    return globals.constructs[callable](source)
