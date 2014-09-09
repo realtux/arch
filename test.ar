@@ -1,27 +1,32 @@
-// i'm a comment
+// header
+out '*************************************\n'
+out 'Arch - Lexical Analysis & Programming\n'
+out '*************************************\n'
 
-// i'm not \/
-out 'hello world\n'
+// test assignments
+var name1 = 'brian'
+var name2 = 'kevin'
+var name3 = 'nate'
+var name4 = 'brody'
 
-// what happens if i output nothing
-out 'r\n'
-//out ''
-//out ''
+// test outputs
+out 'test outputs:\n'
+out name1
+out '\n'
+out name2
+out '\n'
+out name3
+out '\n'
+out name4
+out '\n\n'
 
-var name = 'brian'
-var name = 'tom\n'
-var namey = 'breez'
-out name
-out namey
-//var name = 'sam'
+// test concatentation
+out 'test concatentation:\n'
+out name1 ~ name2 ~ name3 ~ name4
+out '\n\n'
 
-//var test = 'tes'
-
-//out name
-//out test
-
-//if name == 'sam' {
-//    out 'cool'
-//} else {
-//    out 'not cool'
-//}
+// test variable assignment to variable
+out 'test variable assignment from variable and output:\n'
+var name_combined = name1 ~ ' combined with ' ~ name2
+out name_combined
+out '\n\n'
