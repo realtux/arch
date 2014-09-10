@@ -50,7 +50,7 @@ while i < len(source):
         continue
 
     # assignments
-    elif re.search(r"^var [a-z0-9]+\s*\=\s*.+\n", source[i:]):
+    elif re.search(r"^var [a-zA-Z0-9_]+\s*\=\s*.+\n", source[i:]):
         i += handle_assignment(source[i:])
 
     # constructs (out)

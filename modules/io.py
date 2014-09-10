@@ -7,43 +7,16 @@ from parsetools import *
 from modules.error import *
 
 def out(source):
-    i = 0
+    funcmeta = 0
 
-    i += len(out.__name__)
-    i += eat_space(source[i:])
+    funcmeta += len(out.__name__)
+    funcmeta += eat_space(source[i:])
 
-    output = ''
+    ccount, output = evaluate_expression(source[i:])
 
-    # string to output
-    if source[i] == '\'':
-        i += 1
-
-        while source[i] != '\'':
-            output += source[i]
-            i += 1
-
-            # newline means unterminated string, fatal
-            if source[i] == '\n':
-                err_fatal('Unterminated string')
-
-        # compensate for trailing single quote
-        i += 1
-
-    # non-string
-    elif re.search(r"^[a-z]", source[i:]):
-        variable_name = re.compile('^([a-z]+)').search(source[i:]).groups()[0]
-
-        try:
-            output = globals.symbol_table['variables'][variable_name]
-            i += len(variable_name)
-        except KeyError:
-            err_fatal('Undefined variable')
-
-    else:
-        err_fatal('Undefined out instruction')
-
+    # convert the text representations of the newline to a real newline
     output = string.replace(output, '\\n', '\n')
 
     sys.stdout.write(output)
 
-    return i
+    return funcmeta + ccount
