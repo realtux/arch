@@ -4,7 +4,8 @@ import sys
 
 from parsetools import *
 
-from modules.error import *
+from mod.error import *
+from mod.lexer import *
 
 def out(source):
     funcmeta = 0
