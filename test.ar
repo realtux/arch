@@ -30,3 +30,23 @@ out 'test variable assignment from variable and output:\n'
 var name_combined = name1 ~ ' combined with ' ~ name2
 out name_combined
 out '\n\n'
+
+if (name1 == 'brian') {
+    out 'the name is brian\n'
+
+    // nested if
+    if (name2 != name3) {
+        out 'name2 does not equal name3\n'
+
+        // second nested if
+        if (name3 != 'brody') {
+            out 'name3 is not brody\n'
+        }
+    }
+}
+
+out 'after if\n\n\n'
+
+if (name4 == 'brody') {
+    out 'yes\n'
+}
