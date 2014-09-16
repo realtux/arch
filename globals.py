@@ -1,4 +1,4 @@
-from modules.io import *
+from mod.io import *
 
 def init():
     global line
