@@ -45,8 +45,6 @@ if (name1 == 'brian') {
     }
 }
 
-out 'after if\n\n\n'
-
 if (name4 == 'brody') {
     out 'yes\n'
 }
