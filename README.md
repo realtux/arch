@@ -7,8 +7,7 @@ Arch aims to be:
 - Clean
 - Functional
 
-###Change Log
-===
+### Change Log
 v0.0.1
 - Added expression evaluation
 - Added support for else constructs for conditionals
