@@ -1,4 +1,4 @@
-from mod.io import *
+import mod.io
 
 def init():
     global line
@@ -11,5 +11,5 @@ def init():
 
     global constructs
     constructs = {
-        'out': out,
+        'out': mod.io.out,
     }
