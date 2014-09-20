@@ -9,6 +9,9 @@ var name2 = 'kevin'
 var name3 = 'nate'
 var name4 = 'brody'
 
+var age = 24
+var age2 = 22
+
 // test outputs
 out 'test outputs:\n'
 out name1
@@ -18,6 +21,14 @@ out '\n'
 out name3
 out '\n'
 out name4
+out '\n\n'
+
+// test integer outputs
+out age
+out '\n'
+out age2
+out '\n'
+//out age + age2
 out '\n\n'
 
 // test concatentation
@@ -45,6 +56,14 @@ if (name1 == 'brian') {
     }
 }
 
-if (name4 == 'brody') {
-    out 'yes\n'
+if ('brody' == name4) {
+    out 'backwards works too\n'
+} else {
+    if (name1 == 'brian') {
+        out 'false, but equal to brian\n'
+    }
 }
+
+out 123
+
+out '\n'
