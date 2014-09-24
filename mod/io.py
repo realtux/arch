@@ -8,16 +8,16 @@ import mod.error
 import mod.lexer
 
 def out(source):
-    funcmeta = 0
+    i = 0
 
-    funcmeta += len(out.__name__)
-    funcmeta += parsetools.eat_space(source[funcmeta:])
+    i += parsetools.eat_space(source[i:])
 
-    ccount, output = mod.lexer.evaluate_expression(source[funcmeta:])
+    ccount, output = mod.lexer.evaluate_expression(source[i:])
 
     # convert the text representations of the newline to a real newline
-    output = string.replace(output, '\\n', '\n')
+    if type(output) is not int:
+        output = string.replace(output, '\\n', '\n')
 
-    sys.stdout.write(output)
+    sys.stdout.write(str(output))
 
-    return funcmeta + ccount
+    return i + ccount

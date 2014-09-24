@@ -28,24 +28,31 @@ def lexer(source):
             i += parsetools.eat_comment(source[i:])
             continue
 
-        # assignments
+        # constructs (assignments)
         elif re.search(r"^var [a-zA-Z0-9_]+\s*=\s*.+\n", source[i:]):
             i += mod.constructs.handle_assignment(source[i:])
 
         # constructs (if)
         elif re.search(r"^if", source[i:]):
+            i += 2
             i += mod.constructs.handle_if(source[i:])
 
         # constructs (out)
         elif re.search(r"^out", source[i:]):
-            i += mod.constructs.handle_construct(source[i:])
+            i += 3
+            i += mod.constructs.handle_construct(source[i:], 'out')
 
+        # function
+        elif re.search(r"^[a-zA-Z_]\s*\(", source[i:]):
+            pass
+
+        # stop lexing at the end of whatever block it's in
         elif source[i] == '}':
             i += 1
             break
 
         else:
-            err_fatal('Unrecognized symbol')
+            mod.error.err_fatal('Unrecognized symbol "' + str(source[i]) + '"')
 
     return i
 
@@ -64,20 +71,35 @@ def evaluate_expression(expression):
             # trim the buffer off the original expression
             chars_eaten += len(string) + 2
 
+        # integer assignment
+        elif re.search(r"^[0-9]+", expression[chars_eaten:]):
+            integer = re.search(r"^([0-9]+)", expression[chars_eaten:]).groups()[0]
+
+            expression_buffer = int(integer)
+
+            chars_eaten += len(integer)
+
         # function
         elif re.search(r"^[a-zA-Z]+\(\s*(.+?)\s*\)", expression[chars_eaten:]):
             function_contents = re.search(r"^[a-zA-Z]+\(\s*(.+?)\s*\)", expression[chars_eaten:]).groups()[0]
 
         # variable
-        elif re.search(r"^([a-zA-Z0-9_]+)", expression[chars_eaten:]):
+        elif re.search(r"^([a-zA-Z][a-zA-Z0-9_]+?)", expression[chars_eaten:]):
             variable_name = re.search(r"^([a-zA-Z0-9_]+)", expression[chars_eaten:]).groups()[0]
 
             try:
                 result = globals.symbol_table['variables'][variable_name]
-            except KeyError:
-                err_warning('Undefined variable')
 
-            expression_buffer = expression_buffer + result
+                if type(result) is int:
+                    try:
+                        expression_buffer = int(expression_buffer) + result
+                    except ValueError:
+                        expression_buffer = result
+
+                else:
+                    expression_buffer = expression_buffer + result
+            except KeyError:
+                mod.error.err_warning('Undefined variable')
 
             chars_eaten += len(variable_name)
 
