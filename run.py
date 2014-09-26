@@ -24,13 +24,11 @@ source = ''
 
 # remove all whitespace and string commands end to end
 for sourceline in arch_lines:
-    #print str(i) + ': ' + sourceline
     i += 1
 
     source += str(sourceline.strip()) + '\n'
 
+print '',
+
 # kick it off
 mod.lexer.lexer(source)
-
-# end execution
-print ''
