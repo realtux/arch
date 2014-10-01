@@ -65,5 +65,7 @@ if ('brody' == name4) {
 }
 
 out 123
+out '\n'
+out 98203948
 
 out '\n'
