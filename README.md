@@ -1,5 +1,5 @@
 Arch v0.01
-===
+==========
 
 Experimental lexical analyzer and programming language with a focus on recursive parsing techniques.
 
